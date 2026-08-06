@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+beck/node_modules/
+front/node_modules/
+
+# Build outputs
+dist/
+front/dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment & IDE
+.env
+.env.local
+.vscode/
+.idea/
+.DS_Store

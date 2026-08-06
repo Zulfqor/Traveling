@@ -1,0 +1,12 @@
+{
+  "name": "travel-booking-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"BACK,FRONT\" -c \"cyan,magenta\" \"npm --prefix beck start\" \"npm --prefix front run dev\"",
+    "install:all": "npm install && npm --prefix beck install && npm --prefix front install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

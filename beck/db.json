@@ -1,0 +1,237 @@
+{
+  "hotels": [
+    {
+      "id": "1",
+      "name": "Hilton Tashkent City",
+      "city": "Tashkent",
+      "country": "Uzbekistan",
+      "price": 180,
+      "rating": 4.9,
+      "stars": 5,
+      "latitude": 41.3111,
+      "longitude": 69.2797,
+      "images": [
+        "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": [
+        {
+          "id": "r1",
+          "guestName": "Alexander M.",
+          "rating": 5,
+          "comment": "Exceptional architectural design and silent luxury. Best hotel in Tashkent.",
+          "createdAt": "2026-08-01"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Hyatt Regency Tashkent",
+      "city": "Tashkent",
+      "country": "Uzbekistan",
+      "price": 210,
+      "rating": 4.85,
+      "stars": 5,
+      "latitude": 41.3152,
+      "longitude": 69.2754,
+      "images": [
+        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "3",
+      "name": "Grand Hotel Du Palais",
+      "city": "Paris",
+      "country": "France",
+      "price": 340,
+      "rating": 4.92,
+      "stars": 5,
+      "latitude": 48.8566,
+      "longitude": 2.3522,
+      "images": [
+        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": false,
+      "reviews": []
+    },
+    {
+      "id": "4",
+      "name": "Samarkand Silk Road Resort",
+      "city": "Samarkand",
+      "country": "Uzbekistan",
+      "price": 140,
+      "rating": 4.95,
+      "stars": 4,
+      "latitude": 39.6542,
+      "longitude": 66.9597,
+      "images": [
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "5",
+      "name": "Tokyo Zen Retreat & Spa",
+      "city": "Tokyo",
+      "country": "Japan",
+      "price": 280,
+      "rating": 4.8,
+      "stars": 5,
+      "latitude": 35.6762,
+      "longitude": 139.6503,
+      "images": [
+        "https://images.unsplash.com/photo-1495365200479-c4ed1d35e1aa?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "6",
+      "name": "Bukhara Heritage Caravan",
+      "city": "Bukhara",
+      "country": "Uzbekistan",
+      "price": 95,
+      "rating": 4.7,
+      "stars": 4,
+      "latitude": 39.7747,
+      "longitude": 64.4286,
+      "images": [
+        "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "7",
+      "name": "Ubud Rainforest Villa",
+      "city": "Bali",
+      "country": "Indonesia",
+      "price": 190,
+      "rating": 4.96,
+      "stars": 5,
+      "latitude": -8.4095,
+      "longitude": 115.1889,
+      "images": [
+        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "8",
+      "name": "Colosseum View Suites",
+      "city": "Rome",
+      "country": "Italy",
+      "price": 260,
+      "rating": 4.65,
+      "stars": 4,
+      "latitude": 41.9028,
+      "longitude": 12.4964,
+      "images": [
+        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": false,
+      "reviews": []
+    },
+    {
+      "id": "9",
+      "name": "The Royal Thames Lodge",
+      "city": "London",
+      "country": "UK",
+      "price": 310,
+      "rating": 4.75,
+      "stars": 5,
+      "latitude": 51.5074,
+      "longitude": -0.1278,
+      "images": [
+        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "10",
+      "name": "Burj Al Sahara Heights",
+      "city": "Dubai",
+      "country": "UAE",
+      "price": 520,
+      "rating": 4.98,
+      "stars": 5,
+      "latitude": 25.2048,
+      "longitude": 55.2708,
+      "images": [
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "11",
+      "name": "Manhattan Skyline Residence",
+      "city": "New York",
+      "country": "USA",
+      "price": 450,
+      "rating": 4.72,
+      "stars": 4,
+      "latitude": 40.7128,
+      "longitude": -74.0060,
+      "images": [
+        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    },
+    {
+      "id": "12",
+      "name": "Secret Hideaway Eco Lodge",
+      "city": "Tashkent",
+      "country": "Uzbekistan",
+      "price": 85,
+      "rating": 4.3,
+      "stars": 3,
+      "latitude": 41.28,
+      "longitude": 69.23,
+      "images": [
+        "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "available": true,
+      "reviews": []
+    }
+  ],
+  "bookings": [
+    {
+      "id": "b101",
+      "hotelId": "1",
+      "guestName": "John Traveler",
+      "phone": "+998 90 123 45 67",
+      "email": "john.traveler@gmail.com",
+      "checkIn": "2026-08-15",
+      "checkOut": "2026-08-17",
+      "guests": 2,
+      "nights": 2,
+      "totalPrice": 360,
+      "status": "Upcoming",
+      "createdAt": "2026-08-06"
+    },
+    {
+      "id": "b102",
+      "hotelId": "2",
+      "guestName": "John Traveler",
+      "phone": "+998 90 123 45 67",
+      "email": "john.traveler@gmail.com",
+      "checkIn": "2026-07-10",
+      "checkOut": "2026-07-12",
+      "guests": 1,
+      "nights": 2,
+      "totalPrice": 420,
+      "status": "Completed",
+      "createdAt": "2026-07-01"
+    }
+  ]
+}

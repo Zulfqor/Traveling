@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans bg-[#FFFFFF] text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] selection:bg-[#0A0A0A] selection:text-white dark:selection:bg-white dark:selection:text-black;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans font-bold tracking-tight;
+  }
+}
+
+/* Ticket Perforation Divider Line - Strict Monochrome */
+.ticket-perforation-wrapper {
+  @apply relative w-full my-2 overflow-hidden py-1;
+}
+
+.ticket-divider {
+  @apply w-full border-b border-dashed border-[#E5E5E5] dark:border-[#262626];
+}
+
+.ticket-notch-left {
+  @apply absolute -left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#FFFFFF] dark:bg-[#0A0A0A] border-r border-[#E5E5E5] dark:border-[#262626] z-10;
+}
+
+.ticket-notch-right {
+  @apply absolute -right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#FFFFFF] dark:bg-[#0A0A0A] border-l border-[#E5E5E5] dark:border-[#262626] z-10;
+}
+
+/* Architectural Eyebrow Metadata */
+.eyebrow {
+  @apply uppercase text-[11px] font-semibold tracking-[0.08em] text-[#8A8A8A];
+}
+
+/* Sharp Rectangular Button Styling */
+.btn-sharp {
+  @apply rounded-none h-12 px-6 font-sans font-semibold text-xs tracking-[0.08em] uppercase transition-all duration-200 flex items-center justify-center gap-2.5;
+}
+
+.btn-primary {
+  @apply btn-sharp bg-[#0A0A0A] text-white hover:bg-white hover:text-[#0A0A0A] border border-[#0A0A0A] dark:bg-[#F5F5F5] dark:text-[#0A0A0A] dark:hover:bg-[#0A0A0A] dark:hover:text-[#F5F5F5] dark:border-[#F5F5F5];
+}
+
+.btn-outline {
+  @apply btn-sharp bg-transparent text-[#0A0A0A] dark:text-[#F5F5F5] border border-[#0A0A0A] dark:border-[#F5F5F5] hover:bg-[#0A0A0A] hover:text-white dark:hover:bg-[#F5F5F5] dark:hover:text-[#0A0A0A];
+}
+
+/* Smooth Focus Ring Utility */
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A0A0A] dark:focus-visible:ring-[#F5F5F5] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black;
+}
+
+/* Shimmer Skeleton Sweep Animation - Monochrome */
+@keyframes shimmerSweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(240, 240, 240, 0.6) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(240, 240, 240, 0.6) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerSweep 1.6s infinite ease-in-out;
+}
+
+.dark .skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(20, 20, 20, 0.6) 0%,
+    rgba(40, 40, 40, 1) 50%,
+    rgba(20, 20, 20, 0.6) 100%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
