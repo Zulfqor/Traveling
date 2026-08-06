@@ -49,3 +49,19 @@ export const submitReviewApi = async (hotelId, reviewObj) => {
 
   return response.data;
 };
+
+export const incrementHelpfulReviewApi = async (hotelId, reviewId) => {
+  const hotel = await fetchHotelById(hotelId);
+  const updatedReviews = (hotel.reviews || []).map(r => {
+    if (r.id === reviewId) {
+      return { ...r, helpfulCount: (r.helpfulCount || 0) + 1 };
+    }
+    return r;
+  });
+
+  const response = await axios.patch(`${API_BASE_URL}/hotels/${hotelId}`, {
+    reviews: updatedReviews
+  });
+
+  return response.data;
+};

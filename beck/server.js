@@ -24,8 +24,12 @@ const swaggerDocument = {
   },
   servers: [
     {
+      url: "https://backend-production-109c0.up.railway.app",
+      description: "Railway Production Server"
+    },
+    {
       url: "http://localhost:3001",
-      description: "Local Development Server"
+      description: "Local Server"
     }
   ],
   paths: {
@@ -82,6 +86,16 @@ const swaggerDocument = {
           "200": { description: "Updated hotel object" }
         }
       }
+    },
+    "/bookings": {
+      get: {
+        summary: "Get user bookings",
+        responses: { "200": { description: "List of bookings" } }
+      },
+      post: {
+        summary: "Create new booking",
+        responses: { "201": { description: "Booking created" } }
+      }
     }
   }
 };
@@ -95,5 +109,5 @@ server.use(router);
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`🚀 JSON Server with CORS running on port ${PORT}`);
-  console.log(`📄 Swagger OpenAPI docs available at http://localhost:${PORT}/api-docs`);
+  console.log(`📄 Swagger OpenAPI docs available at /api-docs`);
 });

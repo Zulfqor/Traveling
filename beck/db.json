@@ -6,10 +6,36 @@
       "city": "Tashkent",
       "country": "Uzbekistan",
       "price": 180,
+      "oldPrice": 210,
+      "discountPercent": 15,
+      "basePrice": 160,
+      "taxPrice": 20,
       "rating": 4.9,
+      "reviewCount": 214,
       "stars": 5,
+      "buildingType": "Boutique Hotel",
+      "renovatedYear": "Renovated in 2024",
+      "petFriendly": true,
+      "walkFact": "3 min walk to Tashkent City Park",
+      "demandText": "Only 3 available dates left this month",
+      "verifiedProperty": true,
+      "topRatedHost": true,
       "latitude": 41.3111,
       "longitude": 69.2797,
+      "freeCancellation": true,
+      "instantConfirmation": true,
+      "amenities": ["wifi", "car", "waves", "coffee", "wind"],
+      "nearby": [
+        { "name": "Tashkent International Airport", "distance": "6.2 km" },
+        { "name": "Amir Timur Square", "distance": "1.1 km" },
+        { "name": "Chorsu Bazaar", "distance": "3.5 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt1", "name": "Standard King Room", "price": 180, "capacity": 2, "features": ["City View", "Free Wi-Fi", "King Bed"] },
+        { "id": "rt2", "name": "Executive Park Suite", "price": 260, "capacity": 3, "features": ["Park View", "Lounge Access", "Breakfast"] },
+        { "id": "rt3", "name": "Presidential Panorama Suite", "price": 450, "capacity": 4, "features": ["Panoramic View", "Private Butler", "Jacuzzi"] }
+      ],
+      "monthlyPrices": [200, 190, 180, 175, 180, 210, 220, 215, 195, 185, 170, 190],
       "images": [
         "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80",
         "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80",
@@ -20,9 +46,20 @@
         {
           "id": "r1",
           "guestName": "Alexander M.",
+          "tripType": "Business",
           "rating": 5,
           "comment": "Exceptional architectural design and silent luxury. Best hotel in Tashkent.",
-          "createdAt": "2026-08-01"
+          "createdAt": "2026-08-01",
+          "helpfulCount": 18
+        },
+        {
+          "id": "r2",
+          "guestName": "Elena R.",
+          "tripType": "Couple",
+          "rating": 4.8,
+          "comment": "Perfect location near the park and great breakfast spread.",
+          "createdAt": "2026-07-28",
+          "helpfulCount": 9
         }
       ]
     },
@@ -32,16 +69,48 @@
       "city": "Tashkent",
       "country": "Uzbekistan",
       "price": 210,
+      "basePrice": 185,
+      "taxPrice": 25,
       "rating": 4.85,
+      "reviewCount": 189,
       "stars": 5,
+      "buildingType": "Luxury Resort",
+      "renovatedYear": "Renovated in 2023",
+      "petFriendly": true,
+      "walkFact": "5 min walk to Navoi Theater",
+      "demandText": "Only 2 available dates left this month",
+      "verifiedProperty": true,
+      "topRatedHost": true,
       "latitude": 41.3152,
       "longitude": 69.2754,
+      "freeCancellation": true,
+      "instantConfirmation": false,
+      "amenities": ["wifi", "car", "waves", "wind"],
+      "nearby": [
+        { "name": "Navoi Opera Theater", "distance": "0.8 km" },
+        { "name": "Tashkent International Airport", "distance": "7.0 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt4", "name": "Regency Deluxe Room", "price": 210, "capacity": 2, "features": ["Garden View", "Spa Access"] },
+        { "id": "rt5", "name": "Diplomatic Suite", "price": 380, "capacity": 3, "features": ["Living Area", "Balcony"] }
+      ],
+      "monthlyPrices": [230, 220, 210, 200, 210, 240, 250, 245, 220, 205, 195, 210],
       "images": [
         "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80",
         "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": true,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r3",
+          "guestName": "David K.",
+          "tripType": "Solo",
+          "rating": 5,
+          "comment": "Top tier service and spotless rooms.",
+          "createdAt": "2026-07-25",
+          "helpfulCount": 12
+        }
+      ]
     },
     {
       "id": "3",
@@ -49,15 +118,47 @@
       "city": "Paris",
       "country": "France",
       "price": 340,
+      "oldPrice": 390,
+      "discountPercent": 12,
+      "basePrice": 300,
+      "taxPrice": 40,
       "rating": 4.92,
+      "reviewCount": 342,
       "stars": 5,
+      "buildingType": "Heritage Palace",
+      "renovatedYear": "Built in 1892",
+      "petFriendly": false,
+      "walkFact": "4 min walk to Louvre",
+      "verifiedProperty": true,
+      "topRatedHost": true,
       "latitude": 48.8566,
       "longitude": 2.3522,
+      "freeCancellation": false,
+      "instantConfirmation": true,
+      "amenities": ["wifi", "coffee", "wind"],
+      "nearby": [
+        { "name": "Louvre Museum", "distance": "0.5 km" },
+        { "name": "Eiffel Tower", "distance": "3.2 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt6", "name": "Classic Parisian Room", "price": 340, "capacity": 2, "features": ["Courtyard View", "Marble Bath"] }
+      ],
+      "monthlyPrices": [360, 350, 340, 380, 420, 450, 480, 460, 410, 370, 330, 350],
       "images": [
         "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": false,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r4",
+          "guestName": "Sophie L.",
+          "tripType": "Couple",
+          "rating": 5,
+          "comment": "Unmatched Parisian charm and elegant service.",
+          "createdAt": "2026-07-20",
+          "helpfulCount": 24
+        }
+      ]
     },
     {
       "id": "4",
@@ -65,15 +166,45 @@
       "city": "Samarkand",
       "country": "Uzbekistan",
       "price": 140,
+      "basePrice": 125,
+      "taxPrice": 15,
       "rating": 4.95,
+      "reviewCount": 156,
       "stars": 4,
+      "buildingType": "Silk Road Oasis",
+      "renovatedYear": "Renovated in 2023",
+      "petFriendly": true,
+      "walkFact": "6 min drive to Registan",
+      "verifiedProperty": true,
+      "topRatedHost": true,
       "latitude": 39.6542,
       "longitude": 66.9597,
+      "freeCancellation": true,
+      "instantConfirmation": true,
+      "amenities": ["wifi", "car", "waves", "coffee"],
+      "nearby": [
+        { "name": "Registan Square", "distance": "1.8 km" },
+        { "name": "Gur-e-Amir Mausoleum", "distance": "2.4 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt7", "name": "Silk Standard Room", "price": 140, "capacity": 2, "features": ["Traditional Decor", "Pool Access"] }
+      ],
+      "monthlyPrices": [150, 145, 140, 155, 170, 180, 185, 175, 160, 145, 135, 140],
       "images": [
         "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": true,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r5",
+          "guestName": "Timur A.",
+          "tripType": "Family",
+          "rating": 5,
+          "comment": "Beautiful Eastern motifs combined with modern comfort.",
+          "createdAt": "2026-08-02",
+          "helpfulCount": 15
+        }
+      ]
     },
     {
       "id": "5",
@@ -81,15 +212,47 @@
       "city": "Tokyo",
       "country": "Japan",
       "price": 280,
+      "oldPrice": 320,
+      "discountPercent": 12,
+      "basePrice": 250,
+      "taxPrice": 30,
       "rating": 4.8,
+      "reviewCount": 278,
       "stars": 5,
+      "buildingType": "Zen Sanctuary",
+      "renovatedYear": "Built in 2022",
+      "petFriendly": false,
+      "walkFact": "2 min to Shinjuku Station",
+      "verifiedProperty": true,
+      "topRatedHost": true,
       "latitude": 35.6762,
       "longitude": 139.6503,
+      "freeCancellation": true,
+      "instantConfirmation": true,
+      "amenities": ["wifi", "waves", "coffee", "wind"],
+      "nearby": [
+        { "name": "Shinjuku Station", "distance": "0.9 km" },
+        { "name": "Meiji Shrine", "distance": "1.5 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt8", "name": "Tatami Zen Room", "price": 280, "capacity": 2, "features": ["Onsen Bath", "Futon Bed"] }
+      ],
+      "monthlyPrices": [300, 290, 280, 320, 310, 290, 285, 295, 330, 305, 275, 295],
       "images": [
         "https://images.unsplash.com/photo-1495365200479-c4ed1d35e1aa?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": true,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r6",
+          "guestName": "Kenji T.",
+          "tripType": "Business",
+          "rating": 5,
+          "comment": "Peaceful atmosphere in the heart of Tokyo.",
+          "createdAt": "2026-07-30",
+          "helpfulCount": 21
+        }
+      ]
     },
     {
       "id": "6",
@@ -97,15 +260,45 @@
       "city": "Bukhara",
       "country": "Uzbekistan",
       "price": 95,
+      "basePrice": 85,
+      "taxPrice": 10,
       "rating": 4.7,
+      "reviewCount": 98,
       "stars": 4,
+      "buildingType": "Courtyard Haveli",
+      "renovatedYear": "Renovated in 2021",
+      "petFriendly": true,
+      "walkFact": "1 min walk to Lyabi-Hauz",
+      "verifiedProperty": true,
+      "topRatedHost": false,
       "latitude": 39.7747,
       "longitude": 64.4286,
+      "freeCancellation": true,
+      "instantConfirmation": false,
+      "amenities": ["wifi", "coffee", "wind"],
+      "nearby": [
+        { "name": "Lyabi-Hauz", "distance": "0.3 km" },
+        { "name": "Kalon Minaret", "distance": "0.7 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt9", "name": "Caravan Standard", "price": 95, "capacity": 2, "features": ["Courtyard View", "Tea Service"] }
+      ],
+      "monthlyPrices": [100, 95, 95, 105, 110, 115, 120, 115, 105, 95, 85, 90],
       "images": [
         "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": true,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r7",
+          "guestName": "Jamshid N.",
+          "tripType": "Solo",
+          "rating": 4.7,
+          "comment": "Authentic courtyard and great local tea.",
+          "createdAt": "2026-07-29",
+          "helpfulCount": 7
+        }
+      ]
     },
     {
       "id": "7",
@@ -113,15 +306,45 @@
       "city": "Bali",
       "country": "Indonesia",
       "price": 190,
+      "basePrice": 170,
+      "taxPrice": 20,
       "rating": 4.96,
+      "reviewCount": 312,
       "stars": 5,
+      "buildingType": "Private Villa",
+      "renovatedYear": "Built in 2023",
+      "petFriendly": true,
+      "walkFact": "10 min walk to Monkey Forest",
+      "verifiedProperty": true,
+      "topRatedHost": true,
       "latitude": -8.4095,
       "longitude": 115.1889,
+      "freeCancellation": true,
+      "instantConfirmation": true,
+      "amenities": ["wifi", "waves", "coffee", "wind"],
+      "nearby": [
+        { "name": "Ubud Monkey Forest", "distance": "1.2 km" },
+        { "name": "Tegallalang Rice Terrace", "distance": "8.5 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt10", "name": "Jungle Pool Villa", "price": 190, "capacity": 2, "features": ["Private Pool", "Jungle View"] }
+      ],
+      "monthlyPrices": [210, 200, 190, 195, 210, 240, 260, 250, 220, 200, 180, 205],
       "images": [
         "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": true,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r8",
+          "guestName": "Maya S.",
+          "tripType": "Couple",
+          "rating": 5,
+          "comment": "Unbelievable jungle views and private infinity pool.",
+          "createdAt": "2026-08-01",
+          "helpfulCount": 33
+        }
+      ]
     },
     {
       "id": "8",
@@ -129,15 +352,45 @@
       "city": "Rome",
       "country": "Italy",
       "price": 260,
+      "basePrice": 230,
+      "taxPrice": 30,
       "rating": 4.65,
+      "reviewCount": 184,
       "stars": 4,
+      "buildingType": "Boutique Residence",
+      "renovatedYear": "Renovated in 2022",
+      "petFriendly": false,
+      "walkFact": "3 min walk to Colosseum",
+      "verifiedProperty": true,
+      "topRatedHost": false,
       "latitude": 41.9028,
       "longitude": 12.4964,
+      "freeCancellation": false,
+      "instantConfirmation": true,
+      "amenities": ["wifi", "coffee", "wind"],
+      "nearby": [
+        { "name": "Colosseum", "distance": "0.4 km" },
+        { "name": "Trevi Fountain", "distance": "1.6 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt11", "name": "Colosseum View Suite", "price": 260, "capacity": 2, "features": ["Direct View", "Breakfast"] }
+      ],
+      "monthlyPrices": [270, 260, 260, 290, 310, 340, 350, 330, 300, 280, 250, 265],
       "images": [
         "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": false,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r9",
+          "guestName": "Marco B.",
+          "tripType": "Solo",
+          "rating": 4.6,
+          "comment": "Direct views of ancient history from your window.",
+          "createdAt": "2026-07-22",
+          "helpfulCount": 11
+        }
+      ]
     },
     {
       "id": "9",
@@ -145,15 +398,45 @@
       "city": "London",
       "country": "UK",
       "price": 310,
+      "basePrice": 275,
+      "taxPrice": 35,
       "rating": 4.75,
+      "reviewCount": 205,
       "stars": 5,
+      "buildingType": "Riverfront Lodge",
+      "renovatedYear": "Renovated in 2023",
+      "petFriendly": true,
+      "walkFact": "5 min walk to Tower Bridge",
+      "verifiedProperty": true,
+      "topRatedHost": true,
       "latitude": 51.5074,
       "longitude": -0.1278,
+      "freeCancellation": true,
+      "instantConfirmation": true,
+      "amenities": ["wifi", "car", "coffee", "wind"],
+      "nearby": [
+        { "name": "Tower Bridge", "distance": "0.7 km" },
+        { "name": "London Eye", "distance": "2.1 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt12", "name": "Riverview Executive", "price": 310, "capacity": 2, "features": ["Thames View", "English Breakfast"] }
+      ],
+      "monthlyPrices": [330, 320, 310, 340, 360, 390, 410, 395, 350, 330, 300, 320],
       "images": [
         "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": true,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r10",
+          "guestName": "Oliver W.",
+          "tripType": "Business",
+          "rating": 4.8,
+          "comment": "Riverfront views and impeccable English breakfast.",
+          "createdAt": "2026-07-18",
+          "helpfulCount": 16
+        }
+      ]
     },
     {
       "id": "10",
@@ -161,31 +444,47 @@
       "city": "Dubai",
       "country": "UAE",
       "price": 520,
+      "oldPrice": 600,
+      "discountPercent": 13,
+      "basePrice": 460,
+      "taxPrice": 60,
       "rating": 4.98,
+      "reviewCount": 420,
       "stars": 5,
+      "buildingType": "Skyscraper Hotel",
+      "renovatedYear": "Built in 2023",
+      "petFriendly": false,
+      "walkFact": "4 min walk to Dubai Mall",
+      "verifiedProperty": true,
+      "topRatedHost": true,
       "latitude": 25.2048,
       "longitude": 55.2708,
+      "freeCancellation": true,
+      "instantConfirmation": true,
+      "amenities": ["wifi", "car", "waves", "coffee", "wind"],
+      "nearby": [
+        { "name": "Burj Khalifa", "distance": "1.0 km" },
+        { "name": "Dubai Mall", "distance": "0.8 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt13", "name": "Sky High Suite", "price": 520, "capacity": 2, "features": ["Burj View", "VIP Lounge"] }
+      ],
+      "monthlyPrices": [550, 540, 520, 510, 480, 420, 400, 410, 460, 520, 560, 580],
       "images": [
         "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": true,
-      "reviews": []
-    },
-    {
-      "id": "11",
-      "name": "Manhattan Skyline Residence",
-      "city": "New York",
-      "country": "USA",
-      "price": 450,
-      "rating": 4.72,
-      "stars": 4,
-      "latitude": 40.7128,
-      "longitude": -74.0060,
-      "images": [
-        "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1000&q=80"
-      ],
-      "available": true,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r11",
+          "guestName": "Rashid H.",
+          "tripType": "Family",
+          "rating": 5,
+          "comment": "Unmatched luxury and sky-high infinity pool.",
+          "createdAt": "2026-08-03",
+          "helpfulCount": 45
+        }
+      ]
     },
     {
       "id": "12",
@@ -193,15 +492,44 @@
       "city": "Tashkent",
       "country": "Uzbekistan",
       "price": 85,
+      "basePrice": 75,
+      "taxPrice": 10,
       "rating": 4.3,
+      "reviewCount": 45,
       "stars": 3,
+      "buildingType": "Eco Lodge",
+      "renovatedYear": "Renovated in 2022",
+      "petFriendly": true,
+      "walkFact": "5 min walk to Botanical Garden",
+      "verifiedProperty": true,
+      "topRatedHost": false,
       "latitude": 41.28,
       "longitude": 69.23,
+      "freeCancellation": true,
+      "instantConfirmation": false,
+      "amenities": ["wifi", "car", "coffee"],
+      "nearby": [
+        { "name": "Tashkent Botanical Garden", "distance": "2.1 km" }
+      ],
+      "roomTypes": [
+        { "id": "rt14", "name": "Eco Standard Room", "price": 85, "capacity": 2, "features": ["Garden View", "Organic Breakfast"] }
+      ],
+      "monthlyPrices": [90, 85, 85, 90, 95, 100, 105, 100, 95, 85, 80, 85],
       "images": [
         "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1000&q=80"
       ],
       "available": true,
-      "reviews": []
+      "reviews": [
+        {
+          "id": "r12",
+          "guestName": "Sardor B.",
+          "tripType": "Solo",
+          "rating": 4.3,
+          "comment": "Quiet eco lodge with lush gardens.",
+          "createdAt": "2026-07-26",
+          "helpfulCount": 4
+        }
+      ]
     }
   ],
   "bookings": [

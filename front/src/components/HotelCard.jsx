@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart, Star, MapPin, Check, ImageOff, Eye, GitCompare, ArrowRight, RotateCcw, Zap, Wifi, Car, Waves, Coffee, Wind, Share2, Plus } from 'lucide-react';
+import { Heart, Star, MapPin, Check, ImageOff, Eye, GitCompare, ArrowRight, RotateCcw, Zap, Wifi, Car, Waves, Coffee, Wind, Share2, Plus, ShieldCheck, PawPrint, Footprints } from 'lucide-react';
 import { useFavorites } from '../context/FavoritesContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useCompare } from '../context/CompareContext';
@@ -28,7 +28,7 @@ const AmenityIcon = ({ name }) => {
 
 const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
   const navigate = useNavigate();
-  const { isFavorite, wishlists, addToWishlist, removeFromWishlist, createWishlist } = useFavorites();
+  const { isFavorite, wishlists, addToWishlist, createWishlist } = useFavorites();
   const { formatPrice } = useCurrency();
   const { isCompared, toggleCompare } = useCompare();
   const { t } = useLanguage();
@@ -49,6 +49,10 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
   // Latest review snippet
   const latestReview = hotel.reviews && hotel.reviews.length > 0 ? hotel.reviews[0] : null;
   const authorInitial = latestReview ? latestReview.guestName.charAt(0).toUpperCase() : '?';
+
+  // Price calculations
+  const basePrice = hotel.basePrice || Math.round(hotel.price * 0.88);
+  const taxPrice = hotel.taxPrice || (hotel.price - basePrice);
 
   const handleCardClick = (e) => {
     if (e.target.closest('button') || e.target.closest('input')) return;
@@ -128,7 +132,7 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
             />
           )}
 
-          {/* Top Left: Badges (Available + Free Cancellation + Instant Confirmation) */}
+          {/* Top Left: Badges */}
           <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">
             {hotel.available ? (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase border border-[#0A0A0A] bg-white text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] dark:border-[#F5F5F5]">
@@ -142,17 +146,16 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
               </span>
             )}
 
+            {hotel.discountPercent && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase border border-[#0A0A0A] bg-[#0A0A0A] text-white dark:bg-[#F5F5F5] dark:text-[#0A0A0A]">
+                <span>-{hotel.discountPercent}% OFF</span>
+              </span>
+            )}
+
             {hotel.freeCancellation && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase border border-[#0A0A0A]/40 bg-white/90 text-[#0A0A0A] dark:bg-[#0A0A0A]/90 dark:text-[#F5F5F5] dark:border-[#F5F5F5]/40 backdrop-blur-xs">
                 <RotateCcw className="w-2.5 h-2.5" strokeWidth={1.5} />
                 <span>Free Cancellation</span>
-              </span>
-            )}
-
-            {hotel.instantConfirmation && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase border border-[#0A0A0A]/40 bg-white/90 text-[#0A0A0A] dark:bg-[#0A0A0A]/90 dark:text-[#F5F5F5] dark:border-[#F5F5F5]/40 backdrop-blur-xs">
-                <Zap className="w-2.5 h-2.5" strokeWidth={1.5} />
-                <span>Instant Confirmation</span>
               </span>
             )}
           </div>
@@ -211,7 +214,6 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
                     </button>
                   ))}
 
-                  {/* Add New Wishlist Input */}
                   <div className="pt-1.5 border-t border-[#E5E5E5] dark:border-[#262626] flex items-center gap-1">
                     <input 
                       type="text"
@@ -244,7 +246,23 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
         {/* Info Block */}
         <div className="p-5 space-y-2.5">
           
-          {/* Location & Rating Score + Review Count */}
+          {/* Building Type & Renovation Eyebrow Tag */}
+          <div className="eyebrow flex items-center justify-between text-[9px] text-[#8A8A8A]">
+            <div className="flex items-center gap-1">
+              <span className="font-bold text-[#0A0A0A] dark:text-[#F5F5F5]">{hotel.buildingType || 'Luxury Hotel'}</span>
+              <span>·</span>
+              <span>{hotel.renovatedYear || 'Renovated in 2023'}</span>
+            </div>
+
+            {hotel.verifiedProperty && (
+              <span className="flex items-center gap-0.5 text-[#0A0A0A] dark:text-[#F5F5F5] font-bold">
+                <ShieldCheck className="w-3 h-3 text-[#0A0A0A] dark:text-[#F5F5F5]" />
+                <span>Verified</span>
+              </span>
+            )}
+          </div>
+
+          {/* Location & Rating Score */}
           <div className="eyebrow flex items-center justify-between text-[10px]">
             <div className="flex items-center gap-1 text-[#8A8A8A]">
               <MapPin className="w-3 h-3 text-[#0A0A0A] dark:text-[#F5F5F5]" strokeWidth={1.5} />
@@ -258,7 +276,7 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
             >
               <Star className="w-3 h-3 fill-current" strokeWidth={1.5} />
               <span>{hotel.rating}</span>
-              <span className="text-[#8A8A8A] font-normal">({hotel.reviewCount || 120} reviews)</span>
+              <span className="text-[#8A8A8A] font-normal">({hotel.reviewCount || 120})</span>
             </button>
           </div>
 
@@ -267,21 +285,27 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
             {hotel.name}
           </h3>
 
-          {/* Official Hotel Star Category Row + Contour Key Amenities Icons */}
+          {/* Official Hotel Star Category Row + Top Rated Host Badge */}
           <div className="flex items-center justify-between pt-1 text-xs border-t border-[#E5E5E5] dark:border-[#262626]">
-            {/* 5 Stars */}
-            <div className="flex items-center gap-0.5">
-              {[1, 2, 3, 4, 5].map((sIndex) => (
-                <Star
-                  key={sIndex}
-                  className={`w-3 h-3 ${
-                    sIndex <= officialStars
-                      ? 'fill-current text-[#0A0A0A] dark:text-[#F5F5F5]'
-                      : 'text-[#E5E5E5] dark:text-[#262626]'
-                  }`}
-                  strokeWidth={1.5}
-                />
-              ))}
+            <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-0.5">
+                {[1, 2, 3, 4, 5].map((sIndex) => (
+                  <Star
+                    key={sIndex}
+                    className={`w-3 h-3 ${
+                      sIndex <= officialStars
+                        ? 'fill-current text-[#0A0A0A] dark:text-[#F5F5F5]'
+                        : 'text-[#E5E5E5] dark:text-[#262626]'
+                    }`}
+                    strokeWidth={1.5}
+                  />
+                ))}
+              </div>
+              {hotel.topRatedHost && (
+                <span className="text-[9px] font-bold px-1.5 py-0.2 border border-[#0A0A0A] dark:border-[#F5F5F5]">
+                  Top-Rated Host
+                </span>
+              )}
             </div>
 
             {/* Amenities Icons Strip */}
@@ -292,14 +316,51 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
             </div>
           </div>
 
-          {/* Price Line */}
-          <div className="pt-2 flex items-baseline justify-between border-t border-[#E5E5E5] dark:border-[#262626]">
-            <span className="eyebrow text-[10px]">{t('starting_from')}</span>
-            <div className="flex items-baseline gap-1">
-              <span className="font-bold text-2xl text-[#0A0A0A] dark:text-[#F5F5F5] tracking-tight">
-                {formatPrice(hotel.price)}
-              </span>
-              <span className="text-xs text-[#8A8A8A] font-normal">{t('night_unit')}</span>
+          {/* Useful Micro-Facts (Pet Friendly / Walk Fact) */}
+          {(hotel.petFriendly || hotel.walkFact) && (
+            <div className="flex items-center gap-3 pt-1 text-[10px] text-[#8A8A8A]">
+              {hotel.petFriendly && (
+                <span className="flex items-center gap-1">
+                  <PawPrint className="w-3 h-3 text-[#0A0A0A] dark:text-[#F5F5F5]" />
+                  <span>Pet friendly</span>
+                </span>
+              )}
+              {hotel.walkFact && (
+                <span className="flex items-center gap-1 line-clamp-1">
+                  <Footprints className="w-3 h-3 text-[#0A0A0A] dark:text-[#F5F5F5]" />
+                  <span>{hotel.walkFact}</span>
+                </span>
+              )}
+            </div>
+          )}
+
+          {/* Subtle Demand Indicator */}
+          {hotel.demandText && (
+            <div className="text-[10px] text-[#8A8A8A] italic">
+              {hotel.demandText}
+            </div>
+          )}
+
+          {/* Price Line with Breakdown */}
+          <div className="pt-2 border-t border-[#E5E5E5] dark:border-[#262626]">
+            <div className="flex items-baseline justify-between">
+              <span className="eyebrow text-[10px]">{t('starting_from')}</span>
+              <div className="flex items-baseline gap-1.5">
+                {hotel.oldPrice && (
+                  <span className="text-xs text-[#8A8A8A] line-through font-normal">
+                    {formatPrice(hotel.oldPrice)}
+                  </span>
+                )}
+                <span className="font-bold text-2xl text-[#0A0A0A] dark:text-[#F5F5F5] tracking-tight">
+                  {formatPrice(hotel.price)}
+                </span>
+                <span className="text-xs text-[#8A8A8A] font-normal">{t('night_unit')}</span>
+              </div>
+            </div>
+
+            {/* Price breakdown subline */}
+            <div className="text-right text-[10px] text-[#8A8A8A] font-normal mt-0.5">
+              {formatPrice(basePrice)} base + {formatPrice(taxPrice)} taxes & fees
             </div>
           </div>
 
@@ -309,11 +370,18 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
               onClick={handleQuickViewClick}
               className="mt-2 p-2 bg-[#FAFAFA] dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#262626] text-[11px] space-y-1 hover:border-[#0A0A0A] dark:hover:border-[#F5F5F5] transition-colors"
             >
-              <div className="flex items-center gap-1.5">
-                <div className="w-4 h-4 rounded-full bg-[#E5E5E5] dark:bg-[#262626] text-[#0A0A0A] dark:text-[#F5F5F5] text-[9px] font-bold flex items-center justify-center">
-                  {authorInitial}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-4 h-4 rounded-full bg-[#E5E5E5] dark:bg-[#262626] text-[#0A0A0A] dark:text-[#F5F5F5] text-[9px] font-bold flex items-center justify-center">
+                    {authorInitial}
+                  </div>
+                  <span className="font-bold text-[10px] text-[#8A8A8A]">{latestReview.guestName}</span>
                 </div>
-                <span className="font-bold text-[10px] text-[#8A8A8A]">{latestReview.guestName}</span>
+                {latestReview.tripType && (
+                  <span className="text-[9px] px-1 bg-[#E5E5E5] dark:bg-[#262626] font-bold">
+                    {latestReview.tripType}
+                  </span>
+                )}
               </div>
               <p className="text-[#8A8A8A] dark:text-[#A3A3A3] line-clamp-1 italic text-[10px]">
                 "{latestReview.comment}"
