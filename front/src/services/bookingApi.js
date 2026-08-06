@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { fetchHotelById } from './api';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://backend-production-109c0.up.railway.app';
+const API_BASE_URL = 'http://localhost:3001';
 
 export const fetchBookings = async () => {
   const response = await axios.get(`${API_BASE_URL}/bookings`);

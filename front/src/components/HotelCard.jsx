@@ -1,37 +1,87 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart, Star, MapPin, Check, ImageOff, Eye, GitCompare, ArrowRight } from 'lucide-react';
+import { Heart, Star, MapPin, Check, ImageOff, Eye, GitCompare, ArrowRight, RotateCcw, Zap, Wifi, Car, Waves, Coffee, Wind, Share2, Plus } from 'lucide-react';
 import { useFavorites } from '../context/FavoritesContext';
 import { useCurrency } from '../context/CurrencyContext';
 import { useCompare } from '../context/CompareContext';
 import { useLanguage } from '../context/LanguageContext';
+import { useToast } from '../context/ToastContext';
+
+// Helper component for contour amenity icon mapping
+const AmenityIcon = ({ name }) => {
+  const iconProps = { className: "w-3.5 h-3.5 text-[#8A8A8A]", strokeWidth: 1.5 };
+  switch (name) {
+    case 'wifi':
+      return <Wifi {...iconProps} title="Free Wi-Fi" />;
+    case 'car':
+      return <Car {...iconProps} title="Free Parking" />;
+    case 'waves':
+      return <Waves {...iconProps} title="Swimming Pool" />;
+    case 'coffee':
+      return <Coffee {...iconProps} title="Breakfast Included" />;
+    case 'wind':
+      return <Wind {...iconProps} title="Air Conditioning" />;
+    default:
+      return null;
+  }
+};
 
 const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
   const navigate = useNavigate();
-  const { isFavorite, toggleFavorite } = useFavorites();
+  const { isFavorite, wishlists, addToWishlist, removeFromWishlist, createWishlist } = useFavorites();
   const { formatPrice } = useCurrency();
   const { isCompared, toggleCompare } = useCompare();
   const { t } = useLanguage();
+  const { showToast } = useToast();
 
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [showWishlistMenu, setShowWishlistMenu] = useState(false);
+  const [newWishlistInput, setNewWishlistInput] = useState('');
 
   const imagesList = hotel.images && hotel.images.length > 0 ? hotel.images : (hotel.image ? [hotel.image] : []);
   const favorited = isFavorite(hotel.id);
   const compared = isCompared(hotel.id);
 
-  // Hover-preview photo fade
   const displayImageIndex = (isHovered && imagesList.length > 1) ? 1 : 0;
   const officialStars = hotel.stars || 5;
+
+  // Latest review snippet
+  const latestReview = hotel.reviews && hotel.reviews.length > 0 ? hotel.reviews[0] : null;
+  const authorInitial = latestReview ? latestReview.guestName.charAt(0).toUpperCase() : '?';
 
   const handleCardClick = (e) => {
     if (e.target.closest('button') || e.target.closest('input')) return;
     navigate(`/hotel/${hotel.id}`);
   };
 
-  const handleFavoriteClick = (e) => {
+  const handleHeartClick = (e) => {
     e.stopPropagation();
-    toggleFavorite(hotel);
+    setShowWishlistMenu(prev => !prev);
+  };
+
+  const handleSelectWishlist = (e, wishlistName) => {
+    e.stopPropagation();
+    addToWishlist(hotel, wishlistName);
+    setShowWishlistMenu(false);
+    showToast(`Saved to "${wishlistName}"`);
+  };
+
+  const handleCreateAndAddWishlist = (e) => {
+    e.stopPropagation();
+    if (!newWishlistInput.trim()) return;
+    createWishlist(newWishlistInput.trim());
+    addToWishlist(hotel, newWishlistInput.trim());
+    setNewWishlistInput('');
+    setShowWishlistMenu(false);
+    showToast(`Saved to "${newWishlistInput.trim()}"`);
+  };
+
+  const handleShareClick = (e) => {
+    e.stopPropagation();
+    const url = `${window.location.origin}/hotel/${hotel.id}`;
+    navigator.clipboard.writeText(url);
+    showToast("Link copied to clipboard");
   };
 
   const handleQuickViewClick = (e) => {
@@ -55,8 +105,11 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
     <div
       onClick={handleCardClick}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="group cursor-pointer bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E5] dark:border-[#262626] rounded-card shadow-none hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:border-[#0A0A0A] dark:hover:border-[#F5F5F5] transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between h-full overflow-hidden select-none"
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setShowWishlistMenu(false);
+      }}
+      className="group cursor-pointer bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E5] dark:border-[#262626] rounded-card shadow-none hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:border-[#0A0A0A] dark:hover:border-[#F5F5F5] transition-all duration-200 hover:-translate-y-1 flex flex-col justify-between h-full overflow-hidden select-none relative"
     >
       <div>
         {/* Photo Container */}
@@ -75,42 +128,108 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
             />
           )}
 
-          {/* Top Left: Status Badge */}
-          <div className="absolute top-3 left-3 z-10">
+          {/* Top Left: Badges (Available + Free Cancellation + Instant Confirmation) */}
+          <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">
             {hotel.available ? (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-semibold tracking-widest uppercase border border-[#0A0A0A] bg-white text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] dark:border-[#F5F5F5]">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase border border-[#0A0A0A] bg-white text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] dark:border-[#F5F5F5]">
                 <Check className="w-3 h-3" strokeWidth={1.5} />
                 <span>{t('available_badge')}</span>
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 text-[10px] font-semibold tracking-widest uppercase bg-[#E5E5E5] text-[#8A8A8A] dark:bg-[#262626]">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase bg-[#E5E5E5] text-[#8A8A8A] dark:bg-[#262626]">
                 <Check className="w-3 h-3" strokeWidth={1.5} />
                 <span>{t('booked_badge')}</span>
               </span>
             )}
+
+            {hotel.freeCancellation && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase border border-[#0A0A0A]/40 bg-white/90 text-[#0A0A0A] dark:bg-[#0A0A0A]/90 dark:text-[#F5F5F5] dark:border-[#F5F5F5]/40 backdrop-blur-xs">
+                <RotateCcw className="w-2.5 h-2.5" strokeWidth={1.5} />
+                <span>Free Cancellation</span>
+              </span>
+            )}
+
+            {hotel.instantConfirmation && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[9px] font-bold tracking-wider uppercase border border-[#0A0A0A]/40 bg-white/90 text-[#0A0A0A] dark:bg-[#0A0A0A]/90 dark:text-[#F5F5F5] dark:border-[#F5F5F5]/40 backdrop-blur-xs">
+                <Zap className="w-2.5 h-2.5" strokeWidth={1.5} />
+                <span>Instant Confirmation</span>
+              </span>
+            )}
           </div>
 
-          {/* Top Right Buttons */}
+          {/* Top Right Action Buttons (Share, QuickView, Favorite Heart) */}
           <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5">
+            <button
+              onClick={handleShareClick}
+              aria-label="Share Link"
+              className="w-8 h-8 rounded-none border border-[#0A0A0A] bg-white text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] dark:border-[#F5F5F5] flex items-center justify-center hover:bg-[#0A0A0A] hover:text-white dark:hover:bg-[#F5F5F5] dark:hover:text-[#0A0A0A] transition-colors focus-ring"
+              title="Share Link"
+            >
+              <Share2 className="w-3.5 h-3.5" strokeWidth={1.5} />
+            </button>
+
             <button
               onClick={handleQuickViewClick}
               aria-label="Quick View"
               className="w-8 h-8 rounded-none border border-[#0A0A0A] bg-white text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] dark:border-[#F5F5F5] flex items-center justify-center hover:bg-[#0A0A0A] hover:text-white dark:hover:bg-[#F5F5F5] dark:hover:text-[#0A0A0A] transition-colors focus-ring"
               title="Quick View"
             >
-              <Eye className="w-4 h-4" strokeWidth={1.5} />
+              <Eye className="w-3.5 h-3.5" strokeWidth={1.5} />
             </button>
 
-            <button
-              onClick={handleFavoriteClick}
-              aria-label={favorited ? "Remove favorite" : "Add favorite"}
-              className="w-8 h-8 rounded-none border border-[#0A0A0A] bg-white text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] dark:border-[#F5F5F5] flex items-center justify-center hover:bg-[#0A0A0A] hover:text-white dark:hover:bg-[#F5F5F5] dark:hover:text-[#0A0A0A] transition-colors focus-ring"
-            >
-              <Heart
-                className={`w-4 h-4 ${favorited ? 'fill-current' : ''}`}
-                strokeWidth={1.5}
-              />
-            </button>
+            <div className="relative">
+              <button
+                onClick={handleHeartClick}
+                aria-label={favorited ? "Wishlist options" : "Save to wishlist"}
+                className="w-8 h-8 rounded-none border border-[#0A0A0A] bg-white text-[#0A0A0A] dark:bg-[#0A0A0A] dark:text-[#F5F5F5] dark:border-[#F5F5F5] flex items-center justify-center hover:bg-[#0A0A0A] hover:text-white dark:hover:bg-[#F5F5F5] dark:hover:text-[#0A0A0A] transition-colors focus-ring"
+              >
+                <Heart
+                  className={`w-3.5 h-3.5 ${favorited ? 'fill-current' : ''}`}
+                  strokeWidth={1.5}
+                />
+              </button>
+
+              {/* Wishlists Menu Popover */}
+              {showWishlistMenu && (
+                <div 
+                  className="absolute right-0 top-10 w-48 bg-white dark:bg-[#141414] border border-[#0A0A0A] dark:border-[#F5F5F5] shadow-2xl p-2 z-50 animate-fade-in space-y-1 text-xs"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="eyebrow text-[9px] px-2 py-1 border-b border-[#E5E5E5] dark:border-[#262626]">
+                    Save to Wishlist
+                  </div>
+                  {Object.keys(wishlists).map((listName) => (
+                    <button
+                      key={listName}
+                      onClick={(e) => handleSelectWishlist(e, listName)}
+                      className="w-full text-left px-2 py-1.5 hover:bg-[#FAFAFA] dark:hover:bg-[#262626] font-bold text-[#0A0A0A] dark:text-[#F5F5F5] flex items-center justify-between"
+                    >
+                      <span className="truncate">{listName}</span>
+                      <span className="text-[10px] text-[#8A8A8A]">
+                        ({(wishlists[listName] || []).length})
+                      </span>
+                    </button>
+                  ))}
+
+                  {/* Add New Wishlist Input */}
+                  <div className="pt-1.5 border-t border-[#E5E5E5] dark:border-[#262626] flex items-center gap-1">
+                    <input 
+                      type="text"
+                      placeholder="New list..."
+                      value={newWishlistInput}
+                      onChange={(e) => setNewWishlistInput(e.target.value)}
+                      className="w-full text-[11px] px-1.5 py-1 bg-transparent border border-[#E5E5E5] dark:border-[#262626] focus:outline-none"
+                    />
+                    <button
+                      onClick={handleCreateAndAddWishlist}
+                      className="p-1 bg-[#0A0A0A] text-white dark:bg-[#F5F5F5] dark:text-[#0A0A0A]"
+                    >
+                      <Plus className="w-3 h-3" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
         </div>
@@ -123,49 +242,53 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
         </div>
 
         {/* Info Block */}
-        <div className="p-6 space-y-3">
+        <div className="p-5 space-y-2.5">
           
-          {/* Metadata Eyebrow Line */}
+          {/* Location & Rating Score + Review Count */}
           <div className="eyebrow flex items-center justify-between text-[10px]">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 text-[#8A8A8A]">
               <MapPin className="w-3 h-3 text-[#0A0A0A] dark:text-[#F5F5F5]" strokeWidth={1.5} />
-              <span>{hotel.city}</span>
-              <span>·</span>
-              <span>{hotel.country}</span>
+              <span>{hotel.city}, {hotel.country}</span>
             </div>
 
-            {/* Guest Rating Score */}
-            <div className="flex items-center gap-1 font-bold text-[#0A0A0A] dark:text-[#F5F5F5]">
+            {/* Score & Clickable Total Reviews Count */}
+            <button
+              onClick={handleQuickViewClick}
+              className="flex items-center gap-1 font-bold text-[#0A0A0A] dark:text-[#F5F5F5] hover:underline"
+            >
               <Star className="w-3 h-3 fill-current" strokeWidth={1.5} />
-              <span>{hotel.rating} Score</span>
-            </div>
+              <span>{hotel.rating}</span>
+              <span className="text-[#8A8A8A] font-normal">({hotel.reviewCount || 120} reviews)</span>
+            </button>
           </div>
 
           {/* Hotel Name */}
-          <h3 className="font-bold text-xl sm:text-2xl text-[#0A0A0A] dark:text-[#F5F5F5] line-clamp-1 tracking-tight">
+          <h3 className="font-bold text-xl text-[#0A0A0A] dark:text-[#F5F5F5] line-clamp-1 tracking-tight">
             {hotel.name}
           </h3>
 
-          {/* Official Hotel Star Category Row (5 Lucide Stars) */}
+          {/* Official Hotel Star Category Row + Contour Key Amenities Icons */}
           <div className="flex items-center justify-between pt-1 text-xs border-t border-[#E5E5E5] dark:border-[#262626]">
-            <span className="eyebrow text-[10px]">Hotel Category</span>
-            <div className="flex items-center gap-1">
-              <div className="flex items-center gap-0.5">
-                {[1, 2, 3, 4, 5].map((sIndex) => (
-                  <Star
-                    key={sIndex}
-                    className={`w-3.5 h-3.5 ${
-                      sIndex <= officialStars
-                        ? 'fill-current text-[#0A0A0A] dark:text-[#F5F5F5]'
-                        : 'text-[#E5E5E5] dark:text-[#262626]'
-                    }`}
-                    strokeWidth={1.5}
-                  />
-                ))}
-              </div>
-              <span className="font-bold text-[11px] text-[#0A0A0A] dark:text-[#F5F5F5] ml-1">
-                {officialStars}.0 Star
-              </span>
+            {/* 5 Stars */}
+            <div className="flex items-center gap-0.5">
+              {[1, 2, 3, 4, 5].map((sIndex) => (
+                <Star
+                  key={sIndex}
+                  className={`w-3 h-3 ${
+                    sIndex <= officialStars
+                      ? 'fill-current text-[#0A0A0A] dark:text-[#F5F5F5]'
+                      : 'text-[#E5E5E5] dark:text-[#262626]'
+                  }`}
+                  strokeWidth={1.5}
+                />
+              ))}
+            </div>
+
+            {/* Amenities Icons Strip */}
+            <div className="flex items-center gap-2">
+              {(hotel.amenities || ['wifi', 'waves', 'coffee']).slice(0, 5).map((aName, aIdx) => (
+                <AmenityIcon key={aIdx} name={aName} />
+              ))}
             </div>
           </div>
 
@@ -173,12 +296,30 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
           <div className="pt-2 flex items-baseline justify-between border-t border-[#E5E5E5] dark:border-[#262626]">
             <span className="eyebrow text-[10px]">{t('starting_from')}</span>
             <div className="flex items-baseline gap-1">
-              <span className="font-bold text-2xl sm:text-3xl text-[#0A0A0A] dark:text-[#F5F5F5] tracking-tight">
+              <span className="font-bold text-2xl text-[#0A0A0A] dark:text-[#F5F5F5] tracking-tight">
                 {formatPrice(hotel.price)}
               </span>
               <span className="text-xs text-[#8A8A8A] font-normal">{t('night_unit')}</span>
             </div>
           </div>
+
+          {/* Latest Review Snippet Sub-layer */}
+          {latestReview && (
+            <div 
+              onClick={handleQuickViewClick}
+              className="mt-2 p-2 bg-[#FAFAFA] dark:bg-[#0A0A0A] border border-[#E5E5E5] dark:border-[#262626] text-[11px] space-y-1 hover:border-[#0A0A0A] dark:hover:border-[#F5F5F5] transition-colors"
+            >
+              <div className="flex items-center gap-1.5">
+                <div className="w-4 h-4 rounded-full bg-[#E5E5E5] dark:bg-[#262626] text-[#0A0A0A] dark:text-[#F5F5F5] text-[9px] font-bold flex items-center justify-center">
+                  {authorInitial}
+                </div>
+                <span className="font-bold text-[10px] text-[#8A8A8A]">{latestReview.guestName}</span>
+              </div>
+              <p className="text-[#8A8A8A] dark:text-[#A3A3A3] line-clamp-1 italic text-[10px]">
+                "{latestReview.comment}"
+              </p>
+            </div>
+          )}
 
           {/* Compare Checkbox */}
           <div className="pt-1 flex justify-end">
@@ -197,11 +338,11 @@ const HotelCard = ({ hotel, onBookClick, onQuickViewClick }) => {
       </div>
 
       {/* Action Button */}
-      <div className="p-6 pt-0">
+      <div className="p-5 pt-0">
         <button
           onClick={handleBookClickInternal}
           disabled={!hotel.available}
-          className={`w-full group/btn btn-sharp ${
+          className={`w-full group/btn btn-sharp py-2.5 ${
             hotel.available
               ? 'btn-primary'
               : 'bg-[#FAFAFA] text-[#8A8A8A] border border-[#E5E5E5] dark:bg-[#141414] dark:border-[#262626] dark:text-[#8A8A8A] cursor-not-allowed'
